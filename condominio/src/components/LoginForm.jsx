@@ -1,0 +1,60 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import './LoguinForm.css'
+
+function LoginForm() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("http://127.0.0.1:7000/personas/login/", {
+        correo: username,
+        passwor: password,
+      });
+      alert(`Login exitoso: ${res.data.nombre}`);
+      console.log(res.data);
+    } catch (err) {
+      setError("Error, usuario o contraseña incorrectos");
+    }
+  };
+
+  const handleCrearCuenta = () => {
+    navigate("/RegistroForm");
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="formLogin">
+      <h2>Inicia Sesión</h2>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <div>
+        <label>Usuario:</label>
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+
+        <label>Contraseña:</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+
+        <button type="submit">Ingresar</button>
+        <button type="button" onClick={handleCrearCuenta}>
+          Crear Cuenta
+        </button>
+      </div>
+    </form>
+  );
+}
+
+export default LoginForm;
