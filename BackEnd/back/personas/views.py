@@ -3,8 +3,13 @@
 
 
 from rest_framework.decorators import api_view
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
 from .models import Persona
+from datetime import datetime, timedelta
+import jwt
+from django.conf import settings
+
 
 @api_view(['POST'])
 def login_api(request):
@@ -20,14 +25,20 @@ def login_api(request):
         return Response({"error": "Usuario no encontrado"}, status=401)
 
     if persona.check_password(password):
-        #devolver datos del usuario, o un token si usas JWT
+        payload = {
+            "id": persona.id_persona,
+            "correo": persona.correo,
+            "exp": datetime.utcnow() + timedelta(hours=1)
+        }
+        token = jwt.encode(payload, settings.SECRET_KEY, algorithm="HS256")
         return Response({
             "id": persona.id_persona,
             "nombre": persona.nombre,
-            "correo": persona.correo
+            "correo": persona.correo,
+            "token": token
         })
     else:
-        return Response({"error": "Contraseña incorrecta"}, status=401)
+        return Response({"error": "Contraseña i ncorrecta"}, status=402)
 
 
 

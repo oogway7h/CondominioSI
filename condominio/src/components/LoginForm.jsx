@@ -16,6 +16,7 @@ function LoginForm() {
         correo: username,
         passwor: password,
       });
+      handleInicio();
       alert(`Login exitoso: ${res.data.nombre}`);
       console.log(res.data);
     } catch (err) {
@@ -23,8 +24,12 @@ function LoginForm() {
     }
   };
 
-  const handleCrearCuenta = () => {
+  /*const handleCrearCuenta = () => {
     navigate("/RegistroForm");
+  };*/
+
+  const handleInicio = () => {
+    navigate("/Homen");
   };
 
   return (
@@ -49,9 +54,9 @@ function LoginForm() {
         />
 
         <button type="submit">Ingresar</button>
-        <button type="button" onClick={handleCrearCuenta}>
+        {/*<button type="button" onClick={handleCrearCuenta}>
           Crear Cuenta
-        </button>
+        </button>*/} 
       </div>
     </form>
   );

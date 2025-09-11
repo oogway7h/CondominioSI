@@ -87,17 +87,34 @@ WSGI_APPLICATION = 'back.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "condominio",
-        "USER": "postgres",
-        "PASSWORD": "1234561",
-        "HOST": "localhost",
+        "NAME": "neondb",
+        "USER": "neondb_owner",
+        "PASSWORD": "npg_eJamC6AZUTP7",
+        "HOST": "ep-small-feather-adwxo33j.c-2.us-east-1.aws.neon.tech",
         "PORT": "5432",
         "OPTIONS":{
-            'options': '-c search_path=condo,public'
+            'sslmode': 'require',
+            'client_encoding': 'UTF8',
+            'channel_binding': 'require'
         }
     }
 }
 
+
+
+#DATABASES = {
+    #"default": {
+       # "ENGINE": "django.db.backends.postgresql",
+       # "NAME": "demos",
+       # "USER": "postgres",
+       # "PASSWORD": "1234561",
+      #  "HOST": "localhost",
+     #   "PORT": "5432",
+    #    "OPTIONS":{
+   #         'options': '-c search_path=public'
+  #      }
+ #   }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

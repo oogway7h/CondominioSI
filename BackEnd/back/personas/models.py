@@ -14,7 +14,7 @@ class Administrador(models.Model):
     id_cargo = models.CharField(max_length=60)
 
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'administrador'
 
 
@@ -31,8 +31,89 @@ class AlertaIa(models.Model):
     procesado = models.BooleanField()
 
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'alerta_ia'
+
+
+
+class Bitacora(models.Model):
+    id_bitacora = models.BigAutoField(primary_key=True)
+    id_persona = models.ForeignKey('Persona', models.DO_NOTHING, db_column='id_persona', blank=True, null=True)
+    fecha_hora = models.DateTimeField()
+    accion = models.CharField(max_length=160)
+    detalle = models.TextField(blank=True, null=True)
+
+    class Meta:
+        #managed = False
+        db_table = 'bitacora'
+
+
+class Camara(models.Model):
+    id_camara = models.BigAutoField(primary_key=True)
+    ubicacion = models.CharField(max_length=160)
+    estado = models.TextField()  # This field type is a guess.
+    tipo = models.CharField(max_length=40, blank=True, null=True)
+    rtsp_url = models.TextField(blank=True, null=True)
+
+    class Meta:
+        #managed = False
+        db_table = 'camara'
+
+
+class DetallePago(models.Model):
+    id_detalle = models.BigAutoField(primary_key=True)
+    id_pago = models.ForeignKey('Pago', models.DO_NOTHING, db_column='id_pago')
+    descripcion = models.CharField(max_length=200)
+    monto = models.DecimalField(max_digits=12, decimal_places=2)
+
+    class Meta:
+        #managed = False
+        db_table = 'detalle_pago'
+
+
+"""class DjangoAdminLog(models.Model):
+    action_time = models.DateTimeField()
+    object_id = models.TextField(blank=True, null=True)
+    object_repr = models.CharField(max_length=200)
+    action_flag = models.SmallIntegerField()
+    change_message = models.TextField()
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+
+    class Meta:
+        #managed = False
+        db_table = 'django_admin_log'
+
+
+class DjangoContentType(models.Model):
+    app_label = models.CharField(max_length=100)
+    model = models.CharField(max_length=100)
+
+    class Meta:
+        #managed = False
+        db_table = 'django_content_type'
+        unique_together = (('app_label', 'model'),)
+
+
+class DjangoMigrations(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    app = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    applied = models.DateTimeField()
+
+    class Meta:
+        #managed = False
+        db_table = 'django_migrations'
+
+
+class DjangoSession(models.Model):
+    session_key = models.CharField(primary_key=True, max_length=40)
+    session_data = models.TextField()
+    expire_date = models.DateTimeField()
+
+    class Meta:
+        #managed = False
+        db_table = 'django_session'
 
 
 class AuthGroup(models.Model):
@@ -60,7 +141,7 @@ class AuthPermission(models.Model):
     codename = models.CharField(max_length=100)
 
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'auth_permission'
         unique_together = (('content_type', 'codename'),)
 
@@ -78,7 +159,7 @@ class AuthUser(models.Model):
     date_joined = models.DateTimeField()
 
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'auth_user'
 
 
@@ -88,7 +169,7 @@ class AuthUserGroups(models.Model):
     group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
 
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'auth_user_groups'
         unique_together = (('user', 'group'),)
 
@@ -99,98 +180,20 @@ class AuthUserUserPermissions(models.Model):
     permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
 
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'auth_user_user_permissions'
         unique_together = (('user', 'permission'),)
 
 
-class Bitacora(models.Model):
-    id_bitacora = models.BigAutoField(primary_key=True)
-    id_persona = models.ForeignKey('Persona', models.DO_NOTHING, db_column='id_persona', blank=True, null=True)
-    fecha_hora = models.DateTimeField()
-    accion = models.CharField(max_length=160)
-    detalle = models.TextField(blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'bitacora'
-
-
-class Camara(models.Model):
-    id_camara = models.BigAutoField(primary_key=True)
-    ubicacion = models.CharField(max_length=160)
-    estado = models.TextField()  # This field type is a guess.
-    tipo = models.CharField(max_length=40, blank=True, null=True)
-    rtsp_url = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'camara'
-
-
-class DetallePago(models.Model):
-    id_detalle = models.BigAutoField(primary_key=True)
-    id_pago = models.ForeignKey('Pago', models.DO_NOTHING, db_column='id_pago')
-    descripcion = models.CharField(max_length=200)
-    monto = models.DecimalField(max_digits=12, decimal_places=2)
-
-    class Meta:
-        managed = False
-        db_table = 'detalle_pago'
-
-
-class DjangoAdminLog(models.Model):
-    action_time = models.DateTimeField()
-    object_id = models.TextField(blank=True, null=True)
-    object_repr = models.CharField(max_length=200)
-    action_flag = models.SmallIntegerField()
-    change_message = models.TextField()
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'django_admin_log'
-
-
-class DjangoContentType(models.Model):
-    app_label = models.CharField(max_length=100)
-    model = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'django_content_type'
-        unique_together = (('app_label', 'model'),)
-
-
-class DjangoMigrations(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    app = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    applied = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'django_migrations'
-
-
-class DjangoSession(models.Model):
-    session_key = models.CharField(primary_key=True, max_length=40)
-    session_data = models.TextField()
-    expire_date = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'django_session'
-
-
+"""
 class EspacioComun(models.Model):
     id_espacio = models.BigAutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
     capacidad = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'espacio_comun'
 
 
@@ -198,7 +201,7 @@ class Inquilino(models.Model):
     id_persona = models.OneToOneField('Persona', models.DO_NOTHING, db_column='id_persona', primary_key=True)
 
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'inquilino'
 
 
@@ -209,7 +212,7 @@ class Mensualidad(models.Model):
     id_propiedad = models.ForeignKey('Propiedad', models.DO_NOTHING, db_column='id_propiedad')
 
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'mensualidad'
         unique_together = (('id_propiedad', 'mes', 'anio'),)
 
@@ -224,7 +227,7 @@ class Pago(models.Model):
     anio = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'pago'
 
 
@@ -238,7 +241,7 @@ class Persona(models.Model):
     passwor = models.CharField(max_length=128, blank=True, null=True)  # <-- usando 'passwor'
 
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'persona'
 
     def set_password(self, raw_password):
@@ -255,7 +258,7 @@ class Propiedad(models.Model):
     pertenece_a = models.CharField(max_length=12)
 
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'propiedad'
 
 
@@ -267,7 +270,7 @@ class PropiedadPropietario(models.Model):
     hasta = models.DateField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'propiedad_propietario'
 
 
@@ -275,7 +278,7 @@ class Propietario(models.Model):
     id_persona = models.OneToOneField(Persona, models.DO_NOTHING, db_column='id_persona', primary_key=True)
 
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'propietario'
 
 
@@ -291,7 +294,7 @@ class RegistroAcceso(models.Model):
     hora_salida = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'registro_acceso'
 
 
@@ -304,7 +307,7 @@ class Reserva(models.Model):
     hora_fin = models.DateTimeField()
 
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'reserva'
 
 
@@ -316,5 +319,5 @@ class Vehiculo(models.Model):
     color = models.CharField(max_length=30, blank=True, null=True)
 
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'vehiculo'
