@@ -16,6 +16,10 @@ function LoginForm() {
         correo: username,
         passwor: password,
       });
+
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("access", res.data.access);
+      localStorage.setItem("refresh", res.data.refresh);
       handleInicio();
       alert(`Login exitoso: ${res.data.nombre}`);
       console.log(res.data);

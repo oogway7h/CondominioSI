@@ -40,3 +40,25 @@
   border-radius: 4px;
   cursor: pointer;
 }
+
+.formRegistro option {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  background-color:#d1cbcb;
+  color: #532424;
+  border: 1px solid #a44242; 
+}
+
+
+.formRegistro select {
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  background-color:#f9f9f9;
+  color: #000;
+  border: 1px solid #000; 
+}

@@ -1,10 +1,14 @@
 .formLogin {
   width: 300px;
-  margin: 50px auto;
+  margin: auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .formLogin h2 {
@@ -15,7 +19,7 @@
 }
 
 .formLogin input {
-  display: flex;
+  
   align-items: center;
   width: 100%;
   padding: 5px;
@@ -29,7 +33,7 @@
 .formLogin button {
   width: 100%;
   padding: 10px;
-  background-color: #4CAF50;
+  background-color: #4b8f6f;
   color: white;
   font-weight: bold;
   border: none;

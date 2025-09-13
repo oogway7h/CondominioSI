@@ -238,7 +238,12 @@ class Persona(models.Model):
     correo = models.CharField(unique=True, max_length=120, blank=True, null=True)
     face_ref = models.CharField(max_length=120, blank=True, null=True)
     es_activo = models.BooleanField()
-    passwor = models.CharField(max_length=128, blank=True, null=True)  # <-- usando 'passwor'
+    passwor = models.CharField(max_length=128, blank=True, null=True)
+    ROL_CHOICES = (
+        ('admin', 'Administrador'),
+        ('residente', 'Residente'),
+    )
+    rol = models.CharField(max_length=20, choices=ROL_CHOICES, default='residente') 
 
     class Meta:
         #managed = False
