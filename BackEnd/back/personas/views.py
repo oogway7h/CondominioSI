@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
 from .models import Persona
+from .models import Administrador
 from datetime import datetime, timedelta
 import jwt
 from django.conf import settings
@@ -20,7 +21,7 @@ def login_api(request):
         return Response({"error": "Correo y contraseña requeridos"}, status=400)
 
     try:
-        persona = Persona.objects.get(correo=correo, es_activo=True)
+        persona = Persona.objects.get(correo=correo, es_activo=True, rol='admin')
     except Persona.DoesNotExist:
         return Response({"error": "Usuario no encontrado"}, status=401)
 
@@ -48,6 +49,7 @@ def registro(request):
     correo = request.data.get('correo')
     password = request.data.get('passwor')
     rol = request.data.get('rol')   
+    cargo = request.data.get('cargo')
 
     if not nombre or not correo or not password:
         return Response({"error": "Nombre, correo y contraseña requeridos"}, status=400)
@@ -59,6 +61,9 @@ def registro(request):
     persona.set_password(password)  
     persona.save()
 
+    admin = Administrador(id_persona=persona, id_cargo=cargo)
+    admin.save()
+
     return Response({
         "id": persona.id_persona,
         "nombre": persona.nombre,
@@ -69,15 +74,25 @@ def registro(request):
 @api_view(['GET'])
 def obtener_datos(request):
     correo = request.GET.get('correo')
-    password = request.GET.get('passwor')
 
-    if(not correo or not password):
-        return Response({"error": "Correo y contraseña requeridos"}, status=400)
+    if not correo:
+        return Response({"error"}, status=400)
+
     try:
         persona = Persona.objects.get(correo=correo, es_activo=True)
-        return Response({"nombre": persona.nombre})
+        admin = Administrador.objects.get(id_persona=persona.id_persona)
+
+        return Response({
+            "nombre": persona.nombre,
+            "correo": persona.correo,
+            "id": persona.id_persona,
+            "cargo": admin.id_cargo 
+        })
     except Persona.DoesNotExist:
         return Response({"error": "Usuario no encontrado"}, status=401)
+    except Administrador.DoesNotExist:
+        return Response({"error": "Administrador no encontrado"}, status=403)
+
     
 
 def cerrar_sesion(request):

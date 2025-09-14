@@ -1,18 +1,45 @@
+import { useEffect, useState } from "react";
 import axios from "axios";
-function Profile(){
+import "./profile.css"
 
-    const getUserData = async(e) =>{
-        
-        try{
-            const user=await axios.get("http://127.0.0.1:7000/personas/obtener_datos/");
-            console.log (user.data);
-        }
-        catch(err){
-            console.log("error al obtener datos del usuario");
-        }
-    };
-    return <h1>Hola</h1>
+function Profile() {
+  const [userData, setUserData] = useState(null);
+  const correo= localStorage.getItem("correo");
 
+  const getUserData = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:7000/personas/obtener_datos/", {
+        params: { correo: correo } 
+      });
+      setUserData(response.data);
+    } catch (err) {
+      console.log("se viene aqui", err);
+    }
+  };
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+  return (
+    <div>
+      <h1>Perfil</h1>
+      {userData ? (
+        <div className="datos">
+          <p><strong>Nombre:</strong> {userData.nombre}</p>
+          <p><strong>Correo:</strong> {userData.correo}</p>
+          <p><strong>ID:</strong> {userData.id}</p>
+          <p><strong>Cargo:</strong> {userData.cargo}</p>
+        </div>
+      ) : (
+        <p>Cargando datos...</p>
+      )}
+
+      <button>
+        Editar
+      </button>
+    </div>
+  );
 }
 
 export default Profile;

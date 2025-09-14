@@ -20,6 +20,7 @@ function LoginForm() {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("access", res.data.access);
       localStorage.setItem("refresh", res.data.refresh);
+      localStorage.setItem("correo",res.data.correo);
       handleInicio();
       alert(`Login exitoso: ${res.data.nombre}`);
       console.log(res.data);

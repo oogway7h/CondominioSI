@@ -9,6 +9,7 @@ function RegistroForm() {
   const [password, setPassword] = useState("");
   const [rol, setRol] = useState("residente");
   const [error, setError] = useState("");
+  const [cargo, setCargo] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault(); 
@@ -18,7 +19,8 @@ function RegistroForm() {
         nombre: nombre,
         telefono: telefono,
         passwor: password,  
-        rol:rol
+        rol:rol,
+        cargo:cargo
       });
 
       alert(`Registro exitoso: ${res.data.nombre}`);
@@ -67,7 +69,18 @@ function RegistroForm() {
               <option value="admin">Administrador</option>
               <option value="residente">Residente</option>
             </select>
+
+            
+            <label>Cargo:</label>
+            <input
+              type="cargo"
+              value={cargo}
+              onChange={(e) => setCargo(e.target.value)}
+            />
+
             <button type="submit">Registrar</button>
+
+            
         </div>
       </form>
     )
