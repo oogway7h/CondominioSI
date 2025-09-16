@@ -35,16 +35,18 @@
 
 .layout-body aside {
   width: 220px;
-  background-color: #152c44;
+  background-color: #227466;
   color: #4c1818;
-  padding: 1rem;
+  padding: 10px;
   flex-shrink: 0; 
+
 }
 
 
 .layout-body aside a {
   display: block;
-  color: #2c2424;
+  /*color de las letras cuando desplega*/
+  color: #000000;
   text-decoration: none;
   margin: 0.5rem 0;
   padding: 0.3rem 0.5rem;
@@ -53,13 +55,13 @@
 }
 
 .layout-body aside a:hover {
-  background-color: #1abc9c; 
+  background-color: #7bad71; 
 }
 
 /* Contenido principal */
 .layout-content {
   flex: 1;
   padding: 2rem;
-  background-color: #ecf0f1; 
+  background-color: #dfe2e3; 
   overflow-y: auto;
 }

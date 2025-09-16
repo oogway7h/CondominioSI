@@ -1,0 +1,44 @@
+.sidebar {
+  width: 200px;
+  background-color: aliceblue;
+  padding: 10px;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-boton {
+  width: 100%;
+  background: none;
+  border: none;
+  color: rgb(246, 246, 246);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px;
+}
+
+.menu-boton:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.submenu {
+  list-style: none;
+  padding-left: 15px;
+}
+
+.submenu li {
+  margin: 5px 0;
+}
+
+.arrow {
+  transition: transform 0.3s;
+}
+
+.arrow.open {
+  transform: rotate(90deg);
+}
