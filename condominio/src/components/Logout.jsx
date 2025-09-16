@@ -6,17 +6,13 @@ const LogoutButton = () => {
 
   const handleLogout = async () => {
     try {
-      const refresh = localStorage.getItem("refresh");
-      if (refresh) {
         await axios.post("http://127.0.0.1:7000/personas/cerrar_sesion/", 
-          { refresh },
+          {},
           { withCredentials: true }
         );
-      }
-
-      //borrar tokens
-      localStorage.removeItem("access");
-      localStorage.removeItem("refresh");
+      
+        localStorage.removeItem("token");
+        
 
       navigate("/");
     } catch (err) {

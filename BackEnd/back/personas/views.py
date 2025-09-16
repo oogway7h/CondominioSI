@@ -32,14 +32,22 @@ def login_api(request):
             "exp": datetime.utcnow() + timedelta(hours=1)
         }
         token = jwt.encode(payload, settings.SECRET_KEY, algorithm="HS256")
-        return Response({
+    
+        response = Response({
             "id": persona.id_persona,
             "nombre": persona.nombre,
             "correo": persona.correo,
-            "token": token
         })
+        response.set_cookie(
+            key="access_token",
+            value=token,
+            httponly=True,
+            secure=True,   #poner en True solo en producción con https
+            samesite="None"
+    )
+        return response
     else:
-        return Response({"error": "Contraseña i ncorrecta"}, status=402)
+        return Response({"error": "Contraseña incorrecta"}, status=402)
 
 
 
@@ -71,14 +79,19 @@ def registro(request):
     }, status=201)
 
 
+
+
 @api_view(['GET'])
 def obtener_datos(request):
-    correo = request.GET.get('correo')
-
-    if not correo:
-        return Response({"error"}, status=400)
+    token = request.COOKIES.get("access_token")
+    print("el token",token)    
+    if not token:
+        return Response({"error": "No autenticado"}, status=404)
 
     try:
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
+        correo = payload.get("correo") 
+
         persona = Persona.objects.get(correo=correo, es_activo=True)
         admin = Administrador.objects.get(id_persona=persona.id_persona)
 
@@ -88,13 +101,29 @@ def obtener_datos(request):
             "id": persona.id_persona,
             "cargo": admin.id_cargo 
         })
+    except jwt.ExpiredSignatureError:
+        return Response({"error": "Token expirado"}, status=401)
+    except jwt.InvalidTokenError:
+        return Response({"error": "Token inválido"}, status=402)
     except Persona.DoesNotExist:
-        return Response({"error": "Usuario no encontrado"}, status=401)
+        return Response({"error": "Usuario no encontrado"}, status=404)
     except Administrador.DoesNotExist:
         return Response({"error": "Administrador no encontrado"}, status=403)
-
     
 
+@api_view(['POST'])
 def cerrar_sesion(request):
-    return Response({"message": "Sesión cerrada exitosamente"}, status=200)
+  
+    response = Response({"message": "Sesión cerrada exitosamente"}, status=200)
+
+    try:
+        response.delete_cookie(
+            key="access_token",
+            samesite="None"
+        )
+    except Exception as e:
+        print("Error al borrar cookie:", e)
+
+    return response
+
     

@@ -3,35 +3,34 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import './LoguinForm.css'
 
-function LoginForm() {
+function LoginForm({ setIsLoggedIn }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post("http://127.0.0.1:7000/personas/login/", {
+  e.preventDefault();
+  try {
+    const res = await axios.post(
+      "http://127.0.0.1:7000/personas/login/",
+      {
         correo: username,
         passwor: password,
-      });
+      },
+      { withCredentials: true }
+    );
+    if (setIsLoggedIn) setIsLoggedIn(true);
 
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("access", res.data.access);
-      localStorage.setItem("refresh", res.data.refresh);
-      localStorage.setItem("correo",res.data.correo);
-      handleInicio();
-      alert(`Login exitoso: ${res.data.nombre}`);
-      console.log(res.data);
-    } catch (err) {
-      setError("Error, usuario o contraseña incorrectos");
-    }
-  };
-
-  /*const handleCrearCuenta = () => {
-    navigate("/RegistroForm");
-  };*/
+    await new Promise((r) => setTimeout(r, 0));
+    handleInicio();
+    alert(`Login exitoso: ${res.data.nombre}`);
+    console.log(res.data);
+  } catch (err) {
+    setError("Error, usuario o contraseña incorrectos");
+  }
+};
+  
 
   const handleInicio = () => {
     navigate("/Homen");
@@ -58,10 +57,7 @@ function LoginForm() {
           required
         />
 
-        <button type="submit">Ingresar</button>
-        {/*<button type="button" onClick={handleCrearCuenta}>
-          Crear Cuenta
-        </button>*/} 
+        <button type="submit">Ingresar</button> 
       </div>
     </form>
   );

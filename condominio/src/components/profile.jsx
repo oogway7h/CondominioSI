@@ -4,12 +4,11 @@ import "./profile.css"
 
 function Profile() {
   const [userData, setUserData] = useState(null);
-  const correo= localStorage.getItem("correo");
 
   const getUserData = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:7000/personas/obtener_datos/", {
-        params: { correo: correo } 
+        withCredentials:true
       });
       setUserData(response.data);
     } catch (err) {
