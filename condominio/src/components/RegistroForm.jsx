@@ -10,6 +10,7 @@ function RegistroForm() {
   const [rol, setRol] = useState("residente");
   const [error, setError] = useState("");
   const [cargo, setCargo] = useState("");
+  const [estado,setEstado] =useState("propie");
 
   const handleSubmit = async (e) => {
     e.preventDefault(); 
@@ -20,8 +21,12 @@ function RegistroForm() {
         telefono: telefono,
         passwor: password,  
         rol:rol,
-        cargo:cargo
-      });
+        cargo:cargo,
+        estado:estado 
+      },
+    
+    {withCredentials:true}
+  );
 
       alert(`Registro exitoso: ${res.data.nombre}`);
       console.log(res.data);
@@ -70,6 +75,11 @@ function RegistroForm() {
               <option value="residente">Residente</option>
             </select>
 
+            <label>Estado:</label>
+            <select name="estado" value={estado} onChange={(e) => setEstado(e.target.value)}>
+              <option value="propie">Propietario</option>
+              <option value="inqui">Inquilino</option>
+            </select>
             
             <label>Cargo:</label>
             <input

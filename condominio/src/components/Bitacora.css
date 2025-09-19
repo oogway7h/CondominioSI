@@ -1,0 +1,14 @@
+.dat {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dat th, .dat td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.dat th {
+  background-color: #f2f2f2;
+}

@@ -33,7 +33,7 @@ const Sidebar = () => {
           </button>
           {openMenu === "profile" && (
             <ul className="submenu">
-              <li><Link to="/bitacora">Bitacora</Link></li>
+              <li><Link to="/Bitacora">Bitacora</Link></li>
               <li><Link to="">Reportes</Link></li>
               <li><Link to="">Avisos</Link></li>
             </ul>

@@ -9,6 +9,7 @@ import './App.css'
 import { useEffect, useState } from "react";
 import axios from "axios";
 import GestionUsuarios from "./components/Gestionar_usuario";
+import Bitacora from "./components/Bitacora";
 
 
 function App() {
@@ -66,13 +67,22 @@ function App() {
           //</PrivateRoute>
         } />
 
-        <Route path="/gestionar_usuario" element={
+        <Route path="/Gestionar_usuario" element={
           //<PrivateRoute isLoggedIn={isLoggedIn}>
             <MainLayout>
               <GestionUsuarios />
             </MainLayout>
           //</PrivateRoute>
         } />
+
+         <Route path="/Bitacora" element={
+          //<PrivateRoute isLoggedIn={isLoggedIn}>
+            <MainLayout>
+              <Bitacora />
+            </MainLayout>
+          //</PrivateRoute>
+        } />
+
       </Routes>
     </Router>
   );

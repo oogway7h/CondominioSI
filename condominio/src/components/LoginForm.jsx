@@ -25,6 +25,7 @@ function LoginForm({ setIsLoggedIn }) {
     await new Promise((r) => setTimeout(r, 0));
     handleInicio();
     alert(`Login exitoso: ${res.data.nombre}`);
+    
     console.log(res.data);
   } catch (err) {
     setError("Error, usuario o contraseña incorrectos");
