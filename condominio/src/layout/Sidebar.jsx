@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import LogoutButton from "../components/Logout";
-import "./Sidebar.css"; // tu CSS aquí
+import "./Sidebar.css"; 
 
 const Sidebar = () => {
   const [openMenu, setOpenMenu] = useState(null);
@@ -48,7 +48,7 @@ const Sidebar = () => {
           {openMenu === "registro" && (
             <ul className="submenu">
               <li><Link to="/RegistroForm">Registrar</Link></li>
-              <li><Link to="/Editar">Editar</Link></li>
+              <li><Link to="/Gestionar_usuario"> Gestionar Usuario</Link></li>
               <li><Link to="/Profile">Ver Perfil</Link></li>
             </ul>
           )}

@@ -7,7 +7,7 @@ function Profile() {
 
   const getUserData = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:7000/personas/obtener_datos/", {
+      const response = await axios.get("http://127.0.0.1:8000/personas/obtener_datos/", {
         withCredentials:true
       });
       setUserData(response.data);

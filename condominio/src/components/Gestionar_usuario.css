@@ -1,0 +1,31 @@
+h2{
+    color: black;
+    font-size: 20px;
+}
+
+.dat{
+    color: black;
+    width: 100%;
+    border-collapse:collapse;
+    margin-top: 20px;
+    border-radius: 20%;
+}
+
+.dat th{
+    color: black;
+}
+
+.dat td{
+    color: black;
+    border-bottom: 1px solid#000;
+    border-top: 1px solid #000;
+
+}
+
+.dat #elim{
+    background-color: rgb(147, 86, 86);
+}
+
+.dat #edit{
+    background-color: rgb(98, 139, 161);
+}   

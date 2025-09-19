@@ -13,7 +13,7 @@ function LoginForm({ setIsLoggedIn }) {
   e.preventDefault();
   try {
     const res = await axios.post(
-      "http://127.0.0.1:7000/personas/login/",
+      "http://127.0.0.1:8000/personas/login/",
       {
         correo: username,
         passwor: password,

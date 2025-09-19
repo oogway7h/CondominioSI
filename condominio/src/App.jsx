@@ -8,6 +8,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import './App.css'  
 import { useEffect, useState } from "react";
 import axios from "axios";
+import GestionUsuarios from "./components/Gestionar_usuario";
 
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get("http://127.0.0.1:7000/personas/obtener_datos/", {
+        const res = await axios.get("http://127.0.0.1:8000/personas/obtener_datos/", {
           withCredentials: true, 
         });
         setIsLoggedIn(true);
@@ -61,6 +62,14 @@ function App() {
           //<PrivateRoute isLoggedIn={isLoggedIn}>
             <MainLayout>
               <RegistroForm />
+            </MainLayout>
+          //</PrivateRoute>
+        } />
+
+        <Route path="/gestionar_usuario" element={
+          //<PrivateRoute isLoggedIn={isLoggedIn}>
+            <MainLayout>
+              <GestionUsuarios />
             </MainLayout>
           //</PrivateRoute>
         } />

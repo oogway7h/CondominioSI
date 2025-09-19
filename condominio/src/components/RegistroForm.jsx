@@ -14,7 +14,7 @@ function RegistroForm() {
   const handleSubmit = async (e) => {
     e.preventDefault(); 
     try {
-      const res = await axios.post("http://127.0.0.1:7000/personas/registro/",{
+      const res = await axios.post("http://127.0.0.1:8000/personas/registro/",{
         correo: correo,
         nombre: nombre,
         telefono: telefono,
