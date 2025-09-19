@@ -10,6 +10,9 @@ from .models import Administrador
 from datetime import datetime, timedelta
 import jwt
 from django.conf import settings
+from .models import Bitacora
+from .utils import registrar_bitacora
+from .models import Inquilino,Propietario
 
 
 @api_view(['POST'])
@@ -32,7 +35,7 @@ def login_api(request):
             "exp": datetime.utcnow() + timedelta(hours=1)
         }
         token = jwt.encode(payload, settings.SECRET_KEY, algorithm="HS256")
-    
+        registrar_bitacora(persona,"inicio de sesion","inicio sesion correctamente")
         response = Response({
             "id": persona.id_persona,
             "nombre": persona.nombre,
@@ -57,6 +60,7 @@ def registro(request):
     correo = request.data.get('correo')
     password = request.data.get('passwor')
     rol = request.data.get('rol')   
+    estado=request.data.get('estado')
     cargo = request.data.get('cargo')
 
     if not nombre or not correo or not password:
@@ -64,20 +68,41 @@ def registro(request):
 
     if Persona.objects.filter(correo=correo).exists():
         return Response({"error": "Correo ya registrado"}, status=400)
-    print (rol)
+
     persona = Persona(nombre=nombre, correo=correo, es_activo=True, rol=rol)
     persona.set_password(password)  
     persona.save()
 
-    admin = Administrador(id_persona=persona, id_cargo=cargo)
-    admin.save()
+    if rol == 'admin':
+        admin = Administrador(id_persona=persona, id_cargo=cargo)
+        admin.save()
+    elif estado == 'propie':
+        propietario = Propietario(id_persona=persona)
+        propietario.save()
+    elif estado == 'inqui':
+        inquilino = Inquilino(id_persona=persona)
+        inquilino.save()
+
+
+    token = request.COOKIES.get("access_token")
+    if token:
+        import jwt
+        from django.conf import settings
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
+        admin_actor = Persona.objects.get(correo=payload.get("correo"))
+
+        # Registrar acción en bitácora
+        registrar_bitacora(
+            admin_actor,
+            "registro de usuario",
+            f"Se registró a {persona.nombre} con id={persona.id_persona}"
+        )
 
     return Response({
         "id": persona.id_persona,
         "nombre": persona.nombre,
         "correo": persona.correo
     }, status=201)
-
 
 
 
@@ -115,12 +140,23 @@ def obtener_datos(request):
 def cerrar_sesion(request):
   
     response = Response({"message": "Sesión cerrada exitosamente"}, status=200)
+    token = request.COOKIES.get("access_token")
+    persona = None
 
+    if token:
+        import jwt
+        from django.conf import settings
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
+        persona = Persona.objects.get(correo=payload.get("correo"))
+    
+    registrar_bitacora(persona,"Cierre de sesion",
+                           f"El usuario: {persona.nombre} cerró sesión")
     try:
         response.delete_cookie(
             key="access_token",
             samesite="None"
         )
+        
     except Exception as e:
         print("Error al borrar cookie:", e)
 
@@ -130,7 +166,19 @@ def cerrar_sesion(request):
 
 @api_view(['GET'])
 def gestionar_usuario(request):
+   
     try:
+        token = request.COOKIES.get("access_token")
+        persona = None
+
+        if token:
+            import jwt
+            from django.conf import settings
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
+            persona = Persona.objects.get(correo=payload.get("correo"))
+        
+        registrar_bitacora(persona, "Gestionar usuario", "Entró a la vista gestionar usuarios")
+
         personas = Persona.objects.filter(es_activo=True)
 
         if not personas.exists():
@@ -145,7 +193,7 @@ def gestionar_usuario(request):
             }
             for p in personas
         ]
-
+        
         return Response({"usuarios": datos}, status=200)
 
     except Exception as e:
@@ -157,7 +205,29 @@ def gestionar_usuario(request):
 def eliminar_usuario(request,id):
     try:
         persona=Persona.objects.get(id_persona=id)
-        persona.delete()    
+        persona.delete()
+        registrar_bitacora(persona,"Borrar usuario",
+                           f"se eliminó al usuario {persona.nombre} con id: {persona.id}")    
         return Response({"message": "usuario eliminado con exito"})
+        
     except:    
         return Response({"message": "error al eliminar usuario"})
+    
+
+
+@api_view(['GET'])
+def obtener_bitacora(request):
+    
+    registros = Bitacora.objects.all().order_by('-fecha_hora') 
+    data = []
+
+    for r in registros:
+        data.append({
+            "id": r.id_bitacora,
+            "usuario": r.id_persona.nombre if r.id_persona else "Desconocido",
+            "fecha_hora": r.fecha_hora,
+            "accion": r.accion,
+            "detalle": r.detalle
+        })
+
+    return Response({"bitacora": data})
