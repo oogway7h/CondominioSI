@@ -9,4 +9,6 @@ urlpatterns =[
     path('registro/', registro, name='registro'),
     path('obtener_datos/', obtener_datos, name='obtener_datos'),
     path('cerrar_sesion/',v.cerrar_sesion, name='cerrar_sesion'),
+    path('gestionar_usuario/', v.gestionar_usuario, name='gestionar_usuario'),
+    path('eliminar_usuario/<int:id>/',v.eliminar_usuario, name='eliminar_usuario')
 ]

@@ -126,4 +126,38 @@ def cerrar_sesion(request):
 
     return response
 
-    
+
+
+@api_view(['GET'])
+def gestionar_usuario(request):
+    try:
+        personas = Persona.objects.filter(es_activo=True)
+
+        if not personas.exists():
+            return Response({"message": "No se encontraron usuarios"}, status=404)
+
+        datos = [
+            {
+                "id": p.id_persona,
+                "nombre": p.nombre,
+                "correo": p.correo,
+                "rol": p.rol
+            }
+            for p in personas
+        ]
+
+        return Response({"usuarios": datos}, status=200)
+
+    except Exception as e:
+        return Response({"error": str(e)}, status=500)
+
+
+
+@api_view(['DELETE'])
+def eliminar_usuario(request,id):
+    try:
+        persona=Persona.objects.get(id_persona=id)
+        persona.delete()    
+        return Response({"message": "usuario eliminado con exito"})
+    except:    
+        return Response({"message": "error al eliminar usuario"})

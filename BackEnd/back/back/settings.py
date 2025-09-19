@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'personas',
     'corsheaders',
-    'django_extensions',
+    'django_extensions',    
 ]
 
 
