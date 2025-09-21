@@ -3,6 +3,8 @@ from .views import login_api
 from .views import registro
 from .views import obtener_datos
 from . import views as v
+from .view.propiedasdes import PropiedadViews as p
+
 
 urlpatterns =[
     path('login/', login_api, name='login_api'),
@@ -11,5 +13,8 @@ urlpatterns =[
     path('cerrar_sesion/',v.cerrar_sesion, name='cerrar_sesion'),
     path('gestionar_usuario/', v.gestionar_usuario, name='gestionar_usuario'),
     path('eliminar_usuario/<int:id>/',v.eliminar_usuario, name='eliminar_usuario'),
-    path('bitacora/',v.obtener_bitacora, name='bitacora')
+    path('bitacora/',v.obtener_bitacora, name='bitacora'),
+    path('registrar_propiedad/<int:id>/', p.agregar_propiedad, name='registrar_propiedad'),    
+    path('gestionar_privilegios/',p.obtener_privilegios,name='gestionar_privilegios'),
+    path('actualizar_privilegios/<int:id>/',p.actualizar_privilegios, name='actualizar_privilegios' )
 ]

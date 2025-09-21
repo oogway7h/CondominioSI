@@ -326,3 +326,25 @@ class Vehiculo(models.Model):
     class Meta:
         #managed = False
         db_table = 'vehiculo'
+
+
+from django.db import models
+from django.utils import timezone
+
+class Privilegio(models.Model):
+    id_persona = models.OneToOneField(Persona, models.DO_NOTHING, db_column='id_persona', primary_key=True)
+    corte_cesped = models.BooleanField(default=False)
+    entrada_auto = models.BooleanField(default=False)
+    recojo_basura = models.BooleanField(default=False)
+    avisos_visita = models.BooleanField(default=False)
+    acceso_gimnasio = models.BooleanField(default=False)
+    acceso_piscina = models.BooleanField(default=False)
+    acceso_sala_eventos = models.BooleanField(default=False)
+    permisos_especiales = models.TextField(blank=True, null=True)#para mas flexibilidad
+    
+    #registro para saber cuando se creo o modifico un privilegio
+    creado_en = models.DateTimeField(auto_now_add=True)
+    modificado_en = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'privilegio'
