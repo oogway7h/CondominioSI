@@ -1,4 +1,4 @@
-from ..models import Propiedad, Persona,Privilegio
+from ..models import Propiedad, Persona,Privilegio,Infraccion
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -122,7 +122,24 @@ class PropiedadViews:
             return Response({"error": "Privilegios no encontrados"}, status=404)
         except Exception as e:
             return Response({"error": str(e)}, status=500)
-
-            
-
         
+
+    @api_view(['POST'])
+    def agregar_infraccion(request, id):
+        monto = request.data.get('monto')
+        descripcion = request.data.get('descripcion')
+        fecha = request.data.get('fecha')
+        estado = request.data.get('estado')
+
+        try:
+            persona = Persona.objects.get(id_persona=id)
+            infraccion = Infraccion.objects.create(
+                id_persona=persona,   
+                monto=monto,
+                descripcion=descripcion,
+                fecha=fecha,
+                estado=estado
+            )
+            return Response({"message": "Infracción registrada con éxito", "id_infraccion": infraccion.id_infraccion})
+        except Exception as e:
+            return Response({"message": f"Error al agregar infracción: {str(e)}"}, status=400)

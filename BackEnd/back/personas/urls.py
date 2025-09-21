@@ -16,5 +16,6 @@ urlpatterns =[
     path('bitacora/',v.obtener_bitacora, name='bitacora'),
     path('registrar_propiedad/<int:id>/', p.agregar_propiedad, name='registrar_propiedad'),    
     path('gestionar_privilegios/',p.obtener_privilegios,name='gestionar_privilegios'),
-    path('actualizar_privilegios/<int:id>/',p.actualizar_privilegios, name='actualizar_privilegios' )
+    path('actualizar_privilegios/<int:id>/',p.actualizar_privilegios, name='actualizar_privilegios' ),
+    path('agregar_infraccion/<int:id>/',p.agregar_infraccion,name='agregar_infraccion'),
 ]

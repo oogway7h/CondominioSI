@@ -219,8 +219,9 @@ class Mensualidad(models.Model):
 
 class Pago(models.Model):
     id_pago = models.BigAutoField(primary_key=True)
-    id_cuota = models.ForeignKey(Mensualidad, models.DO_NOTHING, db_column='id_cuota')
+    id_cuota = models.ForeignKey(Mensualidad, models.DO_NOTHING, db_column='id_cuota',blank=True, null=True)
     id_persona = models.ForeignKey('Persona', models.DO_NOTHING, db_column='id_persona')
+    id_infraccion = models.ForeignKey('Infraccion', models.DO_NOTHING, db_column='id_infraccion', blank=True, null=True)
     fecha = models.DateField()
     monto = models.DecimalField(max_digits=12, decimal_places=2)
     estado = models.TextField()  # This field type is a guess.
@@ -348,3 +349,14 @@ class Privilegio(models.Model):
     
     class Meta:
         db_table = 'privilegio'
+
+class Infraccion(models.Model):
+    id_infraccion = models.BigAutoField(primary_key=True)
+    id_persona = models.ForeignKey('Persona', models.DO_NOTHING, db_column='id_persona')
+    monto = models.DecimalField(max_digits=12, decimal_places=2)
+    descripcion = models.CharField(max_length=120, blank=True, null=True)
+    fecha = models.DateField(auto_now_add=True)  # opcional: registrar cuándo se genera la infracción
+    estado = models.CharField(max_length=50, blank=True, null=True)  # opcional: pagado, pendiente, etc.
+
+    class Meta:
+        db_table = "infraccion"
