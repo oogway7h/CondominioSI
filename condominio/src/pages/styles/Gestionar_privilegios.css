@@ -1,0 +1,131 @@
+.tabla {
+  padding: 20px;
+  background-color: #f4f6f8; /* gris suave */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  max-width: 95%;
+  margin: 30px auto;
+  overflow-x: auto;
+}
+
+.tabla h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  font-size: 24px;
+}
+
+/* Estilo tabla */
+.dat {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 14px;
+  background: white;
+}
+
+.dat thead {
+  background-color: #34495e;
+  color: white;
+}
+
+.dat th,
+.dat td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.dat tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.dat tr:hover {
+  background-color: #eef5f9;
+  transition: background 0.3s;
+}
+
+/* Botones */
+#elim {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.3s;
+}
+
+#elim:hover {
+  background: #c0392b;
+}
+
+#edit {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.3s;
+}
+
+#edit:hover {
+  background: #2980b9;
+}
+
+.guardar {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: rgb(64, 121, 92);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.guardar:hover {
+  background-color: rgb(44, 94, 70);
+}
+
+/* Switch */
+.switch {
+  width: 40px;
+  height: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.3s;
+  margin: auto;
+}
+
+.switch.true {
+  background: #4caf50; /* verde */
+}
+
+.switch.false {
+  background: #f44336; /* rojo */
+}
+
+.switch::after {
+  content: "";
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  transition: transform 0.3s;
+}
+
+.switch.true::after {
+  transform: translateX(20px);
+}
+

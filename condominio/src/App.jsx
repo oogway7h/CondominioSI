@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import GestionUsuarios from "./components/Gestionar_usuario";
 import Bitacora from "./components/Bitacora";
+import PropiedadForm from "./pages/propiedades/Registrar_propiedad";
+import GestionarPrivilegios from "./pages/propiedades/Gestionar_privilegios";
 
 
 function App() {
@@ -79,6 +81,23 @@ function App() {
           //<PrivateRoute isLoggedIn={isLoggedIn}>
             <MainLayout>
               <Bitacora />
+            </MainLayout>
+          //</PrivateRoute>
+        } />
+
+        <Route path="/Registrar_propiedad" element={
+          //<PrivateRoute isLoggedIn={isLoggedIn}>
+            <MainLayout>
+              <PropiedadForm/>
+            </MainLayout>
+          //</PrivateRoute>
+        } />
+
+
+        <Route path="/Gestionar_privilegios" element={
+          //<PrivateRoute isLoggedIn={isLoggedIn}>
+            <MainLayout>
+              <GestionarPrivilegios/>
             </MainLayout>
           //</PrivateRoute>
         } />

@@ -30,10 +30,17 @@
   color: #000;
   border: 1px solid #000; 
 }
+
+.formRegistro input:focus{
+  border-color: #5278da;
+  box-shadow: 0 0 5px rgba(64, 113, 79, 0.3);
+  outline: none;
+
+}
 .formRegistro button {
   width: 100%;
   padding: 10px;
-  background-color: #4CAF50;
+  background-color:#2e5237;
   color: white;
   font-weight: bold;
   border: none;

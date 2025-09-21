@@ -53,6 +53,24 @@ const Sidebar = () => {
             </ul>
           )}
         </li>
+
+        
+        <li>
+          <button className="menu-boton" onClick={() => toggleMenu("Propiedades")}>
+            Propiedades e Infracciones
+            <span className={`arrow ${openMenu === "Propiedades" ? "open" : ""}`}>▶</span>
+          </button>
+          {openMenu === "Propiedades" && (
+            <ul className="submenu">
+              <li><Link to="/Registrar_propiedad">Registrar</Link></li>
+              <li><Link to="/Gestionar_privilegios"> Gestionar Privilegios</Link></li>
+              <li><Link to="">Gestionar infraccion</Link></li>
+            </ul>
+          )}
+        </li>
+
+
+
          <li>
           <button className="menu-boton" onClick={() => toggleMenu("Finanzas")}>
             Finanzas
