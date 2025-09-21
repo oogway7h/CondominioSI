@@ -1,6 +1,6 @@
 .sidebar {
   width: 200px;
-  background-color: aliceblue;
+  background-color: rgb(143, 164, 182);
   padding: 10px;
 }
 
@@ -10,7 +10,7 @@
   margin: 0;
 }
 
-.menu-boton {
+.menu-boton {       
   width: 100%;
   background: none;
   border: none;
@@ -18,7 +18,7 @@
   cursor: pointer;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items:center;
   padding: 10px 10px;
 }
 

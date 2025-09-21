@@ -12,6 +12,7 @@ import GestionUsuarios from "./components/Gestionar_usuario";
 import Bitacora from "./components/Bitacora";
 import PropiedadForm from "./pages/propiedades/Registrar_propiedad";
 import GestionarPrivilegios from "./pages/propiedades/Gestionar_privilegios";
+import AgregarInfraccion from "./pages/propiedades/Gestionar_infraccion"
 
 
 function App() {
@@ -98,6 +99,14 @@ function App() {
           //<PrivateRoute isLoggedIn={isLoggedIn}>
             <MainLayout>
               <GestionarPrivilegios/>
+            </MainLayout>
+          //</PrivateRoute>
+        } />
+
+        <Route path="/Gestionar_infraccion" element={
+          //<PrivateRoute isLoggedIn={isLoggedIn}>
+            <MainLayout>
+              <AgregarInfraccion/>
             </MainLayout>
           //</PrivateRoute>
         } />

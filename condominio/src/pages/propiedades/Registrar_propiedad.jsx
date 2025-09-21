@@ -5,7 +5,7 @@ import axios from "axios"
 function PropiedadForm({ onSuccess }) {
   const [ubicacion, setUbicacion] = useState("");
   const [perteneceA, setPerteneceA] = useState("");
-  const [personaId, setPersonaId] = useState(""); // id_persona dueño
+  const [personaId, setPersonaId] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 

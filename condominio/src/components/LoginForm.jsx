@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import './LoguinForm.css'
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; 
 
 function LoginForm({ setIsLoggedIn }) {
   const [username, setUsername] = useState("");
@@ -24,7 +26,6 @@ function LoginForm({ setIsLoggedIn }) {
 
     await new Promise((r) => setTimeout(r, 0));
     handleInicio();
-    alert(`Login exitoso: ${res.data.nombre}`);
     
     console.log(res.data);
   } catch (err) {
@@ -33,11 +34,20 @@ function LoginForm({ setIsLoggedIn }) {
 };
   
 
+
   const handleInicio = () => {
-    navigate("/Homen");
+    toast.success("Inicio de sesion exitoso ", {
+      position: "top-center",
+      autoClose: 3000,
+    });
+    setTimeout(() => {
+      navigate("/Homen");
+    },1000); 
   };
 
   return (
+    <>
+    <ToastContainer/> 
     <form onSubmit={handleSubmit} className="formLogin">
       <h2>Inicia Sesión</h2>
       {error && <p style={{ color: "red" }}>{error}</p>}
@@ -59,8 +69,10 @@ function LoginForm({ setIsLoggedIn }) {
         />
 
         <button type="submit">Ingresar</button> 
+        
       </div>
     </form>
+    </>
   );
 }
 
