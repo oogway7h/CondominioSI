@@ -20,6 +20,10 @@
   overflow: auto;
 }
 
+.layout-container header h2{
+  color: #bebebe;
+}
+
 .layout-container header h1{
   color: #34a48e;
 }

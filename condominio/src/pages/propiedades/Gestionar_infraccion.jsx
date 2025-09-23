@@ -18,7 +18,7 @@ function AgregarInfraccion() {
         fecha:fecha,
         estado:estado
       },
-    
+      
     {withCredentials:true}
   );
 
