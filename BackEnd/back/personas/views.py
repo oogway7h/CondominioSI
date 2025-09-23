@@ -40,6 +40,7 @@ def login_api(request):
             "id": persona.id_persona,
             "nombre": persona.nombre,
             "correo": persona.correo,
+            "token": token
         })
         response.set_cookie(
             key="access_token",
@@ -137,6 +138,7 @@ def obtener_datos(request):
             "cargo": admin.id_cargo 
         })
     except jwt.ExpiredSignatureError:
+        print(token)
         return Response({"error": "Token expirado"}, status=401)
     except jwt.InvalidTokenError:
         return Response({"error": "Token inválido"}, status=402)
