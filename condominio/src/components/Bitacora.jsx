@@ -8,9 +8,11 @@ function Bitacora() {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    const API_URL="https://smartcondominiumbackend-production.up.railway.app"
     const fetchBitacora = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/personas/bitacora/", {
+        const response = await axios.get(`${API_URL}/personas/bitacora/`, {
+         //const response = await axios.get(`http://127.0.0.1:8000/personas/bitacora/`, { 
           withCredentials: true
         });
         setRegistros(response.data.bitacora);
@@ -38,6 +40,7 @@ function Bitacora() {
             <th>Fecha y hora</th>
             <th>Acción</th>
             <th>Detalle</th>
+            <th>Ip</th>
           </tr>
         </thead>
         <tbody>
@@ -48,6 +51,7 @@ function Bitacora() {
               <td>{new Date(r.fecha_hora).toLocaleString()}</td>
               <td>{r.accion}</td>
               <td>{r.detalle}</td>
+              <td>{r.ip}</td>
             </tr>
           ))}
         </tbody>

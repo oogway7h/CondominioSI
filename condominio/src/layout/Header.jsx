@@ -1,11 +1,10 @@
 import React from "react";
-import "./mainlayout.css";
 
-const Header = () => {
+const Header = ({ children }) => {
   return (
-    <header style={{ padding: "10px", background: "#333", color: "#fff" }}>
+    <header>
       <h1>Smart Condominium</h1>
-      <h2>Bienvenido</h2>
+      {children}
     </header>
   );
 };

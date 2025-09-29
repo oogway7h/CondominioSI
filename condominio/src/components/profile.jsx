@@ -1,20 +1,28 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./profile.css"
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const [userData, setUserData] = useState(null);
-
+  const navigate = useNavigate();
   const getUserData = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/personas/obtener_datos/", {
-        withCredentials:true
+      const API_URL="https://smartcondominiumbackend-production.up.railway.app"
+      const response = await axios.get(`${API_URL}/personas/obtener_datos/`, {
+      //const response = await axios.get(`http://127.0.0.1:8000/personas/obtener_datos/`, {  
+      withCredentials:true
+
       });
       setUserData(response.data);
     } catch (err) {
       console.log("se viene aqui", err);
     }
   };
+
+  const handleCambiarContrasena =async(e)=>{
+    navigate("/Cambiar_contrasena")
+  }
 
   useEffect(() => {
     getUserData();
@@ -34,7 +42,7 @@ function Profile() {
         <p>Cargando datos...</p>
       )}
 
-      <button>
+      <button onClick={handleCambiarContrasena}>
         Editar
       </button>
     </div>

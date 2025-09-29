@@ -14,10 +14,12 @@ function GestionPrivilegios() {
   const [mostrar, setMostrar] = useState(false);
 
   const handleCambio = async (id, campo, valorActual) => {
-  try {
+  const API_URL="https://smartcondominiumbackend-production.up.railway.app"
+    try {
 
     await axios.patch(
-      `http://127.0.0.1:8000/personas/actualizar_privilegios/${id}/`,
+      
+      `${API_URL}/personas/actualizar_privilegios/${id}/`,
       { [campo]: !valorActual },
       { withCredentials: true }
     );
@@ -54,7 +56,8 @@ const handleGuardar = () => {
   useEffect(() => {
     const fetchUsuarios = async(id)=> {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/personas/gestionar_privilegios/`, {
+        const API_URL="https://smartcondominiumbackend-production.up.railway.app"
+        const response = await axios.get(`${API_URL}/personas/gestionar_privilegios/`, {
           withCredentials: true,
         });
         setUsuarios(response.data.usuarios);

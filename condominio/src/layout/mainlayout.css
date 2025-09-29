@@ -1,71 +1,94 @@
-
 .layout-container {
   display: flex;
-  flex: 1;
   flex-direction: column;
-  height: 100vh; 
+  height: 100vh;
   width: 100vw;
-  overflow: auto;
-
 }
 
-
-.layout-container header {
-  background-color: #0f3458;
-  color: #fff;
-  padding: 0;
-  font-size: 20;
-  font-weight: bold;
-  height: auto;
-  overflow: auto;
-}
-
-.layout-container header h2{
-  color: #bebebe;
-}
+.layout-container header { 
+  background-color: #517465; 
+  color: #fff; 
+  padding: 0; 
+  font-size: 20; 
+  font-weight: bold; 
+  height: auto; 
+  overflow: auto; }
 
 .layout-container header h1{
-  color: #34a48e;
+  color: #bbc2bf;
 }
-
 
 .layout-body {
   display: flex;
-  flex: 1; 
-  overflow: auto;
-  
+  flex: 1;
+  overflow: hidden; 
 }
 
-
-.layout-body aside {
+.layout-sidebar {
   width: 220px;
   background-color: #227466;
   color: #4c1818;
   padding: 10px;
-  flex-shrink: 0; 
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+.layout-body aside a { display: block; /*color de las letras cuando desplega*/ 
+  color: #000000; 
+  text-decoration: none; 
+  margin: 0.5rem 0; 
+  padding: 0.3rem 0.5rem; 
+  border-radius: 4px; 
+  transition: background 0.2s; }
 
+
+@media (max-width: 768px) {
+  .layout-body {
+    flex-direction: column;
+  }
+
+  .layout-sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 220px;
+    transform: translateX(-100%);
+    z-index: 1000;
+  }
+
+  .layout-sidebar.open {
+    transform: translateX(0);
+  }
 }
 
-
-.layout-body aside a {
-  display: block;
-  /*color de las letras cuando desplega*/
-  color: #000000;
-  text-decoration: none;
-  margin: 0.5rem 0;
-  padding: 0.3rem 0.5rem;
-  border-radius: 4px;
-  transition: background 0.2s;
-}
-
-.layout-body aside a:hover {
-  background-color: #7bad71; 
-}
-
-/* Contenido principal */
 .layout-content {
   flex: 1;
   padding: 2rem;
-  background-color: #dfe2e3; 
+  background-color: #363e3d;
   overflow-y: auto;
+}
+
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #0f3458;
+  color: white;
+  padding: 0.5rem 1rem;
+}
+
+.hamburger-btn {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+
+@media (max-width: 768px) {
+  .layout-content {
+    padding: 1rem;
+  }
 }

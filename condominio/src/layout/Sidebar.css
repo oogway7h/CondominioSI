@@ -1,7 +1,9 @@
+
 .sidebar {
   width: 200px;
-  background-color: rgb(143, 164, 182);
+  background-color:  #227466;
   padding: 10px;
+  transition: transform 0.3s ease;
 }
 
 .sidebar-menu {
@@ -29,10 +31,12 @@
 .submenu {
   list-style: none;
   padding-left: 15px;
+  
 }
 
 .submenu li {
   margin: 5px 0;
+  
 }
 
 .arrow {
@@ -41,4 +45,11 @@
 
 .arrow.open {
   transform: rotate(90deg);
+}
+
+
+@media (max-width: 768px) {
+  .menu-boton {
+    display: flex; 
+  }
 }

@@ -1,32 +1,114 @@
-h2{
-    color: black;
-    font-size: 20px;
+h2 {
+  color: #d8e0e2;
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.dat{
-    color: black;
+
+.dat {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.dat th,
+.dat td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  color: #2d3436;
+}
+
+.dat th {
+  background: #f5f6fa;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.dat tr:hover {
+  background: #f1f2f6;
+  transition: background 0.2s ease-in-out;
+}
+
+
+.dat #elim {
+  background-color: #d63031;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.dat #elim:hover {
+  background-color: #b71c1c;
+  transform: scale(1.05);
+}
+
+
+.dat #edit {
+  background-color: #0984e3;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.dat #edit:hover {
+  background-color: #0652dd;
+  transform: scale(1.05);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .dat thead {
+    display: none;
+  }
+
+  .dat,
+  .dat tbody,
+  .dat tr,
+  .dat td {
+    display: block;
     width: 100%;
-    border-collapse:collapse;
-    margin-top: 20px;
-    border-radius: 20%;
+  }
+
+  .dat tr {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  .dat td {
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 0.9rem;
+  }
+
+  .dat td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #636e72;
+  }
+
+  .dat #elim,
+  .dat #edit {
+    width: 48%;
+    text-align: center;
+  }
 }
-
-.dat th{
-    color: black;
-}
-
-.dat td{
-    color: black;
-    border-bottom: 1px solid#000;
-    border-top: 1px solid #000;
-
-}
-
-.dat #elim{
-    background-color: rgb(147, 86, 86);
-}
-
-.dat #edit{
-    background-color: rgb(98, 139, 161);
-}   
-

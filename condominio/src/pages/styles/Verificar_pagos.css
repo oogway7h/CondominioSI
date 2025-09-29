@@ -1,0 +1,103 @@
+.pagos-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.pagos-container h2 {
+  margin-bottom: 15px;
+  color: #f1efef;
+}
+
+.pagos-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.pagos-table th,
+.pagos-table td {
+  border: 1px solid #344534;
+  padding: 8px 12px;
+  text-align: left;
+  color: #1d1e1e;
+}
+
+.pagos-table th {
+  background-color: #3b5b80;
+  font-weight: bold;
+}
+
+.pagos-table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.pagos-table tr:hover {
+  background-color: #e8f0fe;
+}
+
+.pagos-table td {
+  vertical-align: middle;
+  background-color: #e2e5e9;
+  color: #333;
+}
+
+.pagos-table p {
+  margin: 0;
+}
+
+
+@media screen and (max-width: 768px) {
+    .pagos-table, 
+    .pagos-table tbody, 
+    .pagos-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    .pagos-table th {
+        display: none; 
+    }
+
+    .pagos-table tr {
+       
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        padding: 0; 
+        border-radius: 5px;
+        background-color: #fff;
+    }
+
+    .pagos-table td {
+        display: flex; 
+        justify-content: flex-start; 
+        align-items: center;
+
+        text-align: left;
+        padding: 8px 12px; 
+        border: none; 
+        border-bottom: 1px solid #d4d4d4; 
+        background-color: transparent; 
+        color: #333;
+    }
+
+    
+    .pagos-table tr td:last-child {
+        border-bottom: none;
+    }
+
+    .pagos-table td::before {
+    
+        content: attr(data-label) ":";
+        font-weight: bold;
+        color: #3b5b80; 
+        
+        
+        min-width: 120px; 
+        margin-right: 15px; 
+    }
+
+
+    .pagos-table td p {
+        margin: 0;
+    }
+}

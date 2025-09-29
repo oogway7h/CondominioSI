@@ -6,10 +6,10 @@ function GestionUsuarios() {
   const [usuarios, setUsuarios] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
   const handleEliminar = async(id)=>{
     try{
-        await axios.delete(`http://127.0.0.1:8000/personas/eliminar_usuario/${id}/` ,{
+        const API_URL="https://smartcondominiumbackend-production.up.railway.app"
+        await axios.delete(`${API_URL}/eliminar_usuario/${id}/` ,{
             withCredentials:true,
         });
         setUsuarios(usuarios.filter((user) => user.id !== id));
@@ -22,7 +22,8 @@ function GestionUsuarios() {
   useEffect(() => {
     const fetchUsuarios = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/personas/gestionar_usuario/", {
+        const API_URL="https://smartcondominiumbackend-production.up.railway.app"
+        const response = await axios.get(`${API_URL}/personas/gestionar_usuario/`, {
           withCredentials: true,
         });
         setUsuarios(response.data.usuarios);
@@ -54,13 +55,17 @@ function GestionUsuarios() {
         <tbody>
           {usuarios.map((user) => (
             <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.nombre}</td>
-              <td>{user.correo}</td>
-              <td>{user.rol}</td>
-              <td><button id="elim" onClick={()=> handleEliminar(user.id)}>eliminar</button></td>
-              <td><button id="edit" >editar</button></td>
-            </tr>
+              <td data-label="ID">{user.id}</td>
+              <td data-label="Nombre">{user.nombre}</td>
+              <td data-label="Correo">{user.correo}</td>
+              <td data-label="Rol">{user.rol}</td>
+              <td data-label="Acción">
+                <button id="elim" onClick={() => handleEliminar(user.id)}>eliminar</button>
+              </td>
+              <td data-label="Acción">
+                <button id="edit">editar</button>
+              </td>
+          </tr>
           ))}
         </tbody>
       </table>

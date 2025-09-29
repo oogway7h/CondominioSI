@@ -21,7 +21,7 @@ const Sidebar = () => {
           {openMenu === "home" && (
             <ul className="submenu">
               <li><Link to="/Homen">Dashboard</Link></li>
-              <li><Link to="/Analytics">Analytics</Link></li>
+              <li><Link to="/CamaraReconocimiento">Camara entrada</Link></li>
             </ul>
           )}
         </li>
@@ -35,7 +35,7 @@ const Sidebar = () => {
             <ul className="submenu">
               <li><Link to="/Bitacora">Bitacora</Link></li>
               <li><Link to="">Reportes</Link></li>
-              <li><Link to="">Avisos</Link></li>
+              <li><Link to="/Gestionar_aviso">Avisos</Link></li>
             </ul>
           )}
         </li>
@@ -65,6 +65,7 @@ const Sidebar = () => {
               <li><Link to="/Registrar_propiedad">Registrar</Link></li>
               <li><Link to="/Gestionar_privilegios"> Gestionar Privilegios</Link></li>
               <li><Link to="/Gestionar_infraccion">Gestionar infraccion</Link></li>
+              <li><Link to="/Gestionar_vehiculo">Gestionar Vehiculo</Link></li>
             </ul>
           )}
         </li>
@@ -79,6 +80,7 @@ const Sidebar = () => {
           {openMenu === "Finanzas" && (
             <ul className="submenu">
               <li><Link to="/buscar_persona">Buscar</Link></li>
+              <li><Link to="/Verificar_pagos">Verificar Pago</Link></li>
             </ul>
           )}
         </li>

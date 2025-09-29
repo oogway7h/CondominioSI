@@ -1,74 +1,147 @@
-import {useState} from 'react';
-import axios from 'axios';
-import '../styles/Gestionar_infracciones.css'
+import { useEffect, useState } from "react";
+import axios from "axios";
+import "../styles/Gestionar_infracciones.css";
 
 function AgregarInfraccion() {
-  const [monto, setMonto] = useState("");
-  const [descripcion, setDescripcion] = useState("");
-  const [fecha, setFecha] = useState("");
-  const [estado, setEstado] = useState("Pendiente");
+  const [personas, setPersonas] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [mensaje, setMensaje] = useState("");
 
-  const handleSubmit = async (e,id) => {
-    e.preventDefault(); 
+  const [form, setForm] = useState({
+    persona: "",
+    monto: "",
+    descripcion: "",
+    fecha: "",
+    estado: "Pendiente",
+  });
+
+
+  const fetchUsuarios = async () => {
     try {
-      const res = await axios.post(`http://127.0.0.1:8000/personas/agregar_infraccion/17/`,{
-        monto:monto,
-        descripcion:descripcion,
-        fecha:fecha,
-        estado:estado
-      },
-      
-    {withCredentials:true}
-  );
-
-      alert(`Registro exitoso`);
-      console.log(res.data);
+      const API_URL = "https://smartcondominiumbackend-production.up.railway.app";
+      const response = await axios.get(`${API_URL}/personas/gestionar_usuario/`, {
+      //const response = await axios.get(`http://127.0.0.1:8000/personas/gestionar_usuario/`, {
+        withCredentials: true,
+      });
+      setPersonas(response.data.usuarios);
     } catch (err) {
+      console.error(err);
+      setError("No se pudieron cargar los usuarios");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsuarios();
+  }, []);
+
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const API_URL = "https://smartcondominiumbackend-production.up.railway.app";
+
+      const res = await axios.post(`${API_URL}/personas/agregar_infraccion/${form.persona}/`,{
+      //const res = await axios.post(`http://127.0.0.1:8000/personas/agregar_infraccion/${form.persona}/`,{  
+          monto: form.monto,
+          descripcion: form.descripcion,
+          fecha: form.fecha,
+          estado: form.estado,
+        },
+        { withCredentials: true }
+      );
+
+      setMensaje("Infracción registrada correctamente ");
+      console.log(res.data);
+
+
+      setForm({
+        persona: "",
+        monto: "",
+        descripcion: "",
+        fecha: "",
+        estado: "Pendiente",
+      });
+    } catch (err) {
+      console.error(err);
       setError("Error en el registro, intente nuevamente");
-    }   
-    };
+    }
+  };
 
-    return (
-        <form onSubmit={handleSubmit} className="formRegistro">
-        <h2>Registro de Usuario</h2>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <div>
-          <label>Monto:</label>
-          <input
-            type="text"
-            value={monto}
-            onChange={(e) => setMonto(e.target.value)}
-            required
-          />    
-            <label>Descripcion:</label>
-            <textarea className='textarea'
-              type="text"
-              value={descripcion}
-              onChange={(e) => setDescripcion(e.target.value)}
-              
-            />
-            <label>Fecha:</label>    
-            <input
-              type="date"
-              value={fecha}  
-                onChange={(e) => setFecha(e.target.value)}   
-                required
-            />
-            
+  return (
+    <form onSubmit={handleSubmit} className="formRegistroi">
+      <h2>Gestionar infracción</h2>
+      {mensaje && <p style={{ color: "green" }}>{mensaje}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {loading && <p>Cargando usuarios...</p>}
 
-            <label>Estado:</label>
-            <select name="estado" value={estado} onChange={(e) => setEstado(e.target.value)}>
-              <option value="pend">Pendiente</option>
-              <option value="pag">Pagado</option>
-            </select>
+      <div>
+        
+        <label className="form-label">Persona</label>
+        <select
+          name="persona"
+          value={form.persona}
+          onChange={handleChange}
+          className="form-select"
+          required
+        >
+          <option value="">Seleccione una persona</option>
+          {personas.map((p) => (
+            <option key={p.id} value={p.id}>
+              {p.nombre} (ID: {p.id})
+            </option>
+          ))}
+        </select>
 
+        <label>Monto:</label>
+        <input
+          type="text"
+          name="monto"
+          value={form.monto}
+          onChange={handleChange}
+          required
+        />
 
-            <button type="submit">Registrar</button>
+        <label>Descripción:</label>
+        <textarea
+          className="textarea"
+          name="descripcion"
+          value={form.descripcion}
+          onChange={handleChange}
+        />
 
-            
-        </div>
-      </form>
-    )
+        <label>Fecha:</label>
+        <input
+          type="date"
+          name="fecha"
+          value={form.fecha}
+          onChange={handleChange}
+          required
+        />
+
+        <label>Estado:</label>
+        <select
+          name="estado"
+          value={form.estado}
+          onChange={handleChange}
+        >
+          <option value="Pendiente">Pendiente</option>
+          <option value="Pagado">Pagado</option>
+        </select>
+
+        <button type="submit">Registrar</button>
+      </div>
+    </form>
+  );
 }
+
 export default AgregarInfraccion;

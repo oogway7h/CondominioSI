@@ -6,7 +6,8 @@ const LogoutButton = () => {
 
   const handleLogout = async () => {
     try {
-        await axios.post("http://127.0.0.1:8000/personas/cerrar_sesion/", 
+        const API_URL="https://smartcondominiumbackend-production.up.railway.app"
+        await axios.post(`${API_URL}/personas/cerrar_sesion/`, 
           {},
           { withCredentials: true }
         );

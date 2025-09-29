@@ -1,51 +1,85 @@
 .formLogin {
-  width: 300px;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+  width: 350px;
+  margin: 50px auto;
+  padding: 30px 25px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #86a77e, #2f3539);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.formLogin:hover {
+  transform: translateY(-3px);
 }
 
 .formLogin h2 {
   text-align: center;
-  margin-bottom: 20px;
-  color: #000;
+  margin-bottom: 25px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #2d3436;
+}
 
+.formLogin label {
+  width: 100%;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #2d3436;
+  margin-bottom: 6px;
 }
 
 .formLogin input {
-  
-  align-items: center;
-  width: 100%;
-  padding: 5px;
-  margin-bottom: 10px;
-  border-radius: 4px;
-  background-color:#f9f9f9;
-  color: #000;
-  border: 1px solid #000; 
+  width: 90%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #2d3436;
+  border: 1px solid #b2bec3;
+  font-size: 0.95rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.formLogin input:focus {
+  outline: none;
+  border-color: #4b8f6f;
+  box-shadow: 0 0 6px rgba(75, 143, 111, 0.4);
 }
 
 .formLogin button {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
+  margin-top: 8px;
   background-color: #4b8f6f;
   color: white;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 0.95rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
 .formLogin button:hover {
-  background-color: #245027;
+  background-color: #3c7158;
+  transform: scale(1.02);
 }
 
-.formLogin label{
-    color: #000;
-    text-align: left;
+.formLogin button.forgot {
+  background-color: transparent;
+  color: #4b8f6f;
+  font-weight: 500;
+  text-decoration: underline;
+  margin-top: 12px;
 }
+
+.formLogin button.forgot:hover {
+  color: #2d503d;
+}
+
+.logincont{
+  background-color: #010302;
+ }

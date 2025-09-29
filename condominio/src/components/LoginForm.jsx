@@ -11,12 +11,29 @@ function LoginForm({ setIsLoggedIn }) {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const handleRecoverPass=async (e) =>{
+     e.preventDefault();
+        try{
+            const API_URL="https://smartcondominiumbackend-production.up.railway.app"
+            const res = await axios.post(`${API_URL}/personas/obtener_codigo/`,{
+            //const res = await axios.post("http://127.0.0.1:8000/personas/obtener_codigo/",{
+            correo: username,
+            },
+            );
+            console.log("enviado")
+        }catch(err){
+            setError("error al enviar codigo")
+        }
+    navigate('/Recuperar_contraseña')
+  }
+
+
   const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    const res = await axios.post(
-      "http://127.0.0.1:8000/personas/login/",
-      {
+    const API_URL="https://smartcondominiumbackend-production.up.railway.app"
+    //const res = await axios.post(`${API_URL}/personas/login/`,{
+    const res = await axios.post("http://127.0.0.1:8000/personas/login/",{
         correo: username,
         passwor: password,
       },
@@ -69,6 +86,7 @@ function LoginForm({ setIsLoggedIn }) {
         />
 
         <button type="submit">Ingresar</button> 
+        <button className="forgot" onClick={handleRecoverPass}>Olvidé mi contraseña</button>
         
       </div>
     </form>

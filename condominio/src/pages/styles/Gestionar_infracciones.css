@@ -1,6 +1,85 @@
-.textarea{
-    width: 100%;
-    height: 100px;
-    background-color: azure;
-    color: #000;
+.formRegistroi {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.formRegistroi h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.formRegistroi label {
+  display: block;
+  margin-top: 12px;
+  font-weight: 600;
+  color: #444;
+}
+
+
+.formRegistroi input,
+.formRegistroi select,
+.formRegistroi textarea {
+  width: 80%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border 0.2s ease;
+  background-color: #ccc;
+  color: #000;
+}
+
+.formRegistroi input:focus,
+.formRegistroi select:focus,
+.formRegistroi textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.formRegistroi .textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+
+.formRegistroi button {
+  margin-top: 20px;
+  width: 70%;
+  padding: 12px;
+  background: #347454;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.formRegistroi button:hover {
+  background: #184e3c;
+}
+
+
+.formRegistroi p {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.formRegistroi p[style*="red"] {
+  color: #d9534f;
+  font-weight: bold;
+}
+
+.formRegistroi p[style*="green"] {
+  color: #28a745;
+  font-weight: bold;
 }
